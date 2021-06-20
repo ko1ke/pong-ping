@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 
-import { CANVAS_RECT, DRAW_SPEED } from '../constants';
+import { CANVAS_RECT } from '../constants';
 
 import { audioBGM, audioClear, audioFail, audioHit } from '../constants/audios';
 
@@ -12,17 +12,23 @@ import Brick from '../utils/Brick';
 
 interface Props {
   drawSpeed: number;
+  brickLife: number;
   onGameOvered: (finalScore: number, isGameCleared: boolean) => void;
   isSoundOn: boolean;
 }
 
-const Game: React.FC<Props> = ({ drawSpeed, onGameOvered, isSoundOn }) => {
+const Game: React.FC<Props> = ({
+  drawSpeed,
+  brickLife,
+  onGameOvered,
+  isSoundOn,
+}) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const isSoundOnRef = useRef(isSoundOn);
   let ball = new Ball();
   let paddle = new Paddle();
   let score = new Score();
-  let bricks = new Bricks();
+  let bricks = new Bricks(brickLife);
   const rightPressed = useRef(false);
   const leftPressed = useRef(false);
 

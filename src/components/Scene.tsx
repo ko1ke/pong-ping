@@ -5,10 +5,11 @@ import Stage from './scenes/Stage';
 import Result from './scenes/Result';
 type SceneName = 'intro' | 'countDown' | 'stage' | 'result';
 
-const Scene = () => {
+const Scene: React.FC = () => {
   const [scene, setScene] = useState<SceneName>('intro');
   const [score, setScore] = useState(0);
   const [drawSpeed, setDrawSpeed] = useState(100);
+  const [brickLife, setBrickLife] = useState(3);
   const [isCleared, setIsCleared] = useState(false);
   const [isSoundOn, setIsSoundOn] = useState(false);
 
@@ -79,6 +80,7 @@ const Scene = () => {
         {scene === 'intro' ? (
           <Intro
             setDrawSpeed={setDrawSpeed}
+            setBrickLife={setBrickLife}
             onClickStart={() => setScene('countDown')}
           />
         ) : scene === 'countDown' ? (
@@ -89,6 +91,7 @@ const Scene = () => {
         ) : scene === 'stage' ? (
           <Stage
             drawSpeed={drawSpeed}
+            brickLife={brickLife}
             onGameOvered={handleGameOvered}
             isSoundOn={isSoundOn}
           />

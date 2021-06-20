@@ -48,7 +48,7 @@ class Brick {
       case 1:
         return '#0095DD';
       default:
-        return '#0095DD';
+        return '#ff0000';
     }
   }
 }

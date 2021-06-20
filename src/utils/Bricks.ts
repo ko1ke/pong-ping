@@ -6,7 +6,7 @@ class Bricks {
   life: number;
   items: Brick[][];
 
-  constructor(rowCount = 3, columnCount = 5, life = 3) {
+  constructor(life: number, rowCount = 3, columnCount = 5) {
     this.rowCount = rowCount;
     this.columnCount = columnCount;
     this.life = life;
