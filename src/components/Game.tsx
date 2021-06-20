@@ -30,7 +30,7 @@ const Game: React.FC<Props> = ({ drawSpeed, onGameOvered, isSoundOn }) => {
     for (var c = 0; c < bricks.columnCount; c++) {
       for (var r = 0; r < bricks.rowCount; r++) {
         var b = bricks.items[c][r] as Brick;
-        if (b.status === 1) {
+        if (b.life > 0) {
           // x, y means ball axises
           // ボールのx座標がブロックのx座標より大きい;
           // ボールのx座標がブロックのx座標とその幅の和より小さい;
@@ -43,7 +43,7 @@ const Game: React.FC<Props> = ({ drawSpeed, onGameOvered, isSoundOn }) => {
             ball.y < b.y + b.height
           ) {
             ball.invertDy();
-            b.decrementStatus();
+            b.decrementLife();
             score.incrementCount();
             if (isSoundOnRef.current) {
               audioHit.currentTime = 0;
@@ -67,7 +67,7 @@ const Game: React.FC<Props> = ({ drawSpeed, onGameOvered, isSoundOn }) => {
 
       collisionDetection();
 
-      if (score.count === bricks.rowCount * bricks.columnCount) {
+      if (score.count === bricks.rowCount * bricks.columnCount * bricks.life) {
         if (isSoundOnRef.current) {
           audioClear.currentTime = 0;
           audioClear.play();
